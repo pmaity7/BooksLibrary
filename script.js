@@ -28,9 +28,9 @@ submit.addEventListener('click', ()=>{
 	}else if(ifNotRead.checked){
 		readVal = ifNotRead.value;
 	}
-	addBooktoLibrary(bookName, authorName, pages, readVal);
-	bookForm.style.display = 'none';
-
+	if(bookName!='' && authorName!='' && pages!='' && readVal!=''){
+		addBooktoLibrary(bookName, authorName, pages, readVal);
+	}
 	showBooks();
 	location.reload();
 });
@@ -91,6 +91,11 @@ function showBooks(){
 		a.textContent = books[i].author;
 		n.textContent = books[i].noOfPages;
 		r.textContent = books[i].read;
+		if(r.textContent == "Not Read"){
+			bookDiv.style.backgroundColor = 'rgb(100, 8, 0)';
+		} else if (r.textContent == "Read"){
+			bookDiv.style.backgroundColor = 'rgb(8, 100, 0)';
+		}
 		bookDiv.appendChild(t);
 		bookDiv.appendChild(a);
 		bookDiv.appendChild(n);
@@ -140,20 +145,20 @@ function changeReadStatus(e){
 	let library1 = JSON.parse(localStorage.getItem('library'));
 	let bookId = e.target.id;
 	library1 = library1.map(x => JSON.parse(x));
-	console.log(library1);
 	let book = library1[bookId];
 	newBook = new Book(book.title, book.author, book.noOfPages, book.read);
 	newBook.change();
-	console.log(newBook);
 	let statusId = 'readStatus'+bookId;
 	let readStatus = document.getElementById(statusId);
 	readStatus.textContent = newBook.read;
-	//let books = JSON.parse(library1);
-	//console.log(books);
 	library1[bookId].read = newBook.read;
 	library1 = library1.map(x => JSON.stringify(x));
-	console.log(JSON.stringify(library1));
 	localStorage.setItem('library', JSON.stringify(library1));
 	location.reload();
 }
+
+const closeBtn = document.getElementById('close');
+closeBtn.addEventListener('click', () => {
+	bookForm.style.display = 'none';
+})
 

@@ -1,9 +1,72 @@
+body{
+	background-color: rgb(26, 26, 26);
+}
+
 .book{
-	border: 2px solid black;
+	border: 2px solid whitesmoke;
 	border-radius: 5px;
 	padding: 5px;
-	margin: 10px;
+	margin: 25px;
 	width: 16em;
 	text-align: center;
 	display: inline-block;
+	color:  floralwhite;
+	font-family: Arial, Merriweather;
+	background-color: rgb(100, 8, 0);
+}
+
+#add {
+	margin: auto;
+	width: 100%;
+}
+
+#addBook {
+	margin: 5em 0 5em 45%;
+	width: 10em;
+	height: 3em;
+	z-index: 1;
+}
+
+.deleteButton{
+	height: 3em;
+	margin: 5px;
+	width: 10em;
+}
+
+.changeButton{
+	height: 3em;
+	margin: 5px;
+	width: 10em;
+}
+
+#bookForm{
+	position: absolute; 
+	top: 0; 
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	color: floralwhite;
+	background-color: rgba(25, 25, 25, 0.8);
+}
+
+#showAllBooks{
+	z-index: 1;
+}
+
+#box{
+	position: absolute;
+	top: 40%;
+	left: 40%;
+}
+
+#close{
+	position: absolute;
+	left: 95%;
+	top: 5%;
+	background-color: rgba(250, 250, 250, 0.1);
+	color: white;
+	border: 0px;
+	font-size: 3em;
+	cursor: pointer;
 }
