@@ -127,6 +127,6 @@ footer{
 
 h2{
 	height: 120px;
-	word-break: break-all;
-	hyphens: auto;
+    white-space: pre-line;
+    word-wrap: break-word;
 }
