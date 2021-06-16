@@ -1,4 +1,10 @@
 document.addEventListener("DOMContentLoaded", getBooks());
+const addBook = document.getElementById("addBook");
+const bookForm = document.getElementById("bookForm");
+const submit = document.getElementById("submit");
+const showAllBooks = document.getElementById("showAllBooks");
+const input = document.getElementsByTagName("input");
+const closeBtn = document.getElementById('close');
 
 let library;
 if(!localStorage.getItem('library')){
@@ -7,10 +13,6 @@ if(!localStorage.getItem('library')){
 }else{
 	library = JSON.parse(localStorage.getItem("library"));
 }
-const addBook = document.getElementById("addBook");
-const bookForm = document.getElementById("bookForm");
-const submit = document.getElementById("submit");
-const showAllBooks = document.getElementById("showAllBooks");
 
 addBook.addEventListener('click', () => {
 	bookForm.style.display = 'block';
@@ -30,9 +32,12 @@ submit.addEventListener('click', ()=>{
 	}
 	if(bookName!='' && authorName!='' && pages!='' && readVal!=''){
 		addBooktoLibrary(bookName, authorName, pages, readVal);
+		showBooks();
+		location.reload();
+	} else {
+		alert("Please fill in all details.")
 	}
-	showBooks();
-	location.reload();
+	
 });
 
 function Book(title, author, noOfPages, read){
@@ -40,7 +45,6 @@ function Book(title, author, noOfPages, read){
 	this.author = author;
 	this.noOfPages = noOfPages;
 	this.read = read;
-	//return {title, author, noOfPages, read};
 }
 
 Book.prototype.change = function(){
@@ -51,15 +55,28 @@ Book.prototype.change = function(){
 	}
 }
 
-
 function addBooktoLibrary(title, author, noOfPages, read){
 	let book = new Book(title, author, noOfPages, read);
-	//library.push(JSON.stringify(book));
-	library.push(JSON.stringify({title, author, noOfPages, read}));
-	localStorage.setItem('library',JSON.stringify(library));
+	let val = checkBooks(book);
+	if(val == 0){
+		library.push(JSON.stringify({title, author, noOfPages, read}));
+		localStorage.setItem('library',JSON.stringify(library));
+	} else {
+		alert("Book already exists");
+	}
 }
 
-
+function checkBooks(book){
+	let flag = 0;
+	for(let bk of library){
+		bk=JSON.parse(bk);
+		if(bk.title == book.title){
+			flag=1;
+			break;
+		}
+	}
+	return flag;
+}
 
 function getBooks(){
 	let libArray = JSON.parse(localStorage.getItem('library'));
@@ -112,16 +129,14 @@ function showBooks(){
 function deleteBook(e){
 	let bookId = e.target.id;
 	console.log(e.target.id);
-	alert("works fine");
-	let library1 = JSON.parse(localStorage.getItem('library'));
-	//library1 = library1.map(x => JSON.parse(x));
-	//console.log(library1[bookId]);
-	library1.splice(bookId, 1);
-	//console.log(library1);
-	//console.log(JSON.stringify(library1));
-	//library1.push(JSON.stringify(book));
-	localStorage.setItem('library', JSON.stringify(library1));
-	location.reload();
+	const answer = confirm("Do you really want to delete?");
+	if(answer == true){
+		let library1 = JSON.parse(localStorage.getItem('library'));
+		library1.splice(bookId, 1);
+		localStorage.setItem('library', JSON.stringify(library1));
+		location.reload();
+	}
+	
 }
 
 function addDeleteToButton(){
@@ -157,7 +172,7 @@ function changeReadStatus(e){
 	location.reload();
 }
 
-const closeBtn = document.getElementById('close');
+
 closeBtn.addEventListener('click', () => {
 	bookForm.style.display = 'none';
 })
