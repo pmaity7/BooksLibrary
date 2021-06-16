@@ -8,6 +8,7 @@ body{
 	padding: 5px;
 	margin: 25px;
 	width: 16em;
+	max-height: 100%;
 	text-align: center;
 	display: inline-block;
 	color:  floralwhite;
@@ -122,4 +123,9 @@ footer{
 	font-family: Helvetica;
 	font-weight: 600;
 	margin-top: 20px;
+}
+
+h2{
+	word-break: break-all;
+	hyphens: auto;
 }
