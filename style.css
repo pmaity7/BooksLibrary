@@ -5,7 +5,7 @@ body{
 .book{
 	border: 2px solid whitesmoke;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 8px;
 	margin: 25px;
 	width: 20%;
 	max-height: 100%;
@@ -127,6 +127,4 @@ footer{
 
 h2{
 	height: 120px;
-	word-break: break-all;
-	hyphens: auto;
 }
