@@ -1,11 +1,3 @@
-document.addEventListener("DOMContentLoaded", getBooks());
-const addBook = document.getElementById("addBook");
-const bookForm = document.getElementById("bookForm");
-const submit = document.getElementById("submit");
-const showAllBooks = document.getElementById("showAllBooks");
-const input = document.getElementsByTagName("input");
-const closeBtn = document.getElementById('close');
-
 let library;
 if(!localStorage.getItem('library')){
 	library = [];
@@ -13,6 +5,16 @@ if(!localStorage.getItem('library')){
 }else{
 	library = JSON.parse(localStorage.getItem("library"));
 }
+
+document.addEventListener("DOMContentLoaded", getBooks());
+
+const addBook = document.getElementById("addBook");
+const bookForm = document.getElementById("bookForm");
+const submit = document.getElementById("submit");
+const showAllBooks = document.getElementById("showAllBooks");
+const input = document.getElementsByTagName("input");
+const closeBtn = document.getElementById('close');
+
 
 addBook.addEventListener('click', () => {
 	bookForm.style.display = 'block';
