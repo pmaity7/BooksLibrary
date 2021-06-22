@@ -42,20 +42,37 @@ submit.addEventListener('click', ()=>{
 	
 });
 
-function Book(title, author, noOfPages, read){
+/*function Book(title, author, noOfPages, read){
 	this.title = title;
 	this.author = author;
 	this.noOfPages = noOfPages;
 	this.read = read;
+}*/
+
+class Book{
+	constructor(title, author, noOfPages, read){
+		this.title = title;
+		this.author = author;
+		this.noOfPages = noOfPages;
+		this.read = read;
+	}
+
+	change(){
+		if(this.read == "Read"){
+			this.read = "Not Read";
+		}else if(this.read == "Not Read"){
+			this.read = "Read";
+		}
+	}
 }
 
-Book.prototype.change = function(){
+/*Book.prototype.change = function(){
 	if(this.read == "Read"){
 		this.read = "Not Read";
 	}else if(this.read == "Not Read"){
 		this.read = "Read";
 	}
-}
+}*/
 
 function addBooktoLibrary(title, author, noOfPages, read){
 	let book = new Book(title, author, noOfPages, read);
